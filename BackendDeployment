@@ -1,0 +1,14 @@
+Backend has been deployed in 10.49.99.5 Server through a docker-compose file:
+
+
+Steps:
+
+1. Navigate to the backend folder and do the below steps:
+
+   docker build -it prodbackend .
+   
+2. Run the command , 'docker images' and check whether the image 'prodbackend' has been generated
+
+3. Once successfull, run the command 'docker-compose up -d'
+
+4. Run the command 'docker ps -a' to see whether Nodejs and Mongodb dockers are up and running

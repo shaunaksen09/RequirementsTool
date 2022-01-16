@@ -1,0 +1,300 @@
+<div class="container-fluid">
+  
+    
+  <mat-card id="card" style="text-align: center;">
+  <mat-card-content style="text-align: center;">
+    
+  <mat-toolbar color="primary" class="container">
+    <span class="example-fill-remaining-space"></span>
+    <span><img src="assets\images\Logo6.png">Automation Requirement Form</span>
+    <span class="example-fill-remaining-space"></span>
+  </mat-toolbar>
+
+  
+
+  <form [formGroup]="createForm" enctype="multipart/form-data">
+    <div  [hidden]="!isDisplayed">
+      <mat-form-field appearance="outline">
+      <mat-label>Requester Name:</mat-label>
+      <input [class.is-invalid]="reqname.invalid &&
+                                  reqname.touched"
+                                  formControlName="reqname" matInput placeholder="Name" required>
+                                </mat-form-field>
+      <!--<small [class.d-none]="requirementForm.get('RequestName').valid ||
+                              requirementForm.get('RequestName').untouched">
+                              RequestName is required</small> -->
+      <div *ngIf="reqname.invalid && reqname.touched">
+        <small *ngIf="reqname.errors?.required">Requester Name is required</small>
+        <small *ngIf="reqname.errors?.minlength">Requester Name must be at least 4 characters</small>
+        <small class="text-danger" *ngIf="reqname.errors?.forbiddenName">
+          '{{reqname.errors?.forbiddenName.value}}' Requester Name not allowed</small>
+      </div>
+      <br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Team</mat-label>
+        <mat-select placeholder = "Select Team" [(ngModel)]="selectedItem" formControlName="selectedteam" (selectionChange) = "onSelectionChanged($event)" required>
+          <mat-option *ngFor="let option of requesterTeamOptions" [value]="option.value">{{option.value}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Team Name</mat-label>
+        <input matInput placeholder="Team Name" formControlName="reqteam">
+      </mat-form-field>     
+
+      <br>  
+      <mat-form-field appearance="outline">
+      <mat-label required>Requirement/Automation Type:* </mat-label>
+      <input matInput required disabled ><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-radio-group layout="row" class="example-radio-group" formControlName="reqtype" [(ngModel)]="selectedType" (change)="onRadioBtnChange($event, selectedteam.value,reqteam.value)" required>
+        <mat-radio-button class="example-radio-button" *ngFor="let type of requirementType" [value]="type.displayValue">
+          {{type.displayName}}
+        </mat-radio-button>
+      </mat-radio-group>
+      </mat-form-field>
+      <br>     
+        <mat-form-field appearance="outline" [hidden]="isHide">
+          <mat-label>Short Description:</mat-label>
+          <input formControlName="shortdesc" matInput placeholder="Short Description" maxlength="50" required>
+        </mat-form-field>
+        <div *ngIf="shortdesc.invalid && shortdesc.touched">
+          <small *ngIf="shortdesc.errors?.required">Description is required</small>
+          <small *ngIf="shortdesc.errors?.minlength">Description must be at least 20
+            characters</small>
+        </div>
+        <br>
+
+        <mat-form-field appearance="outline"  [hidden]="!isHide">
+          <mat-label>Existing Automations</mat-label>
+          <mat-select placeholder = "Enhancement short description" [(ngModel)]="selectedShortDescItem" formControlName="selectedshortdesc" (selectionChange) = "onSelectionShortDesc($event)" >
+            <mat-option *ngFor="let item of shortDescriptionOptions" [value]="item.shortdesc" required>{{item.shortdesc}}</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Automation Description:</mat-label>
+        <textarea formControlName="automationdesc" matInput placeholder="Description" required> </textarea>
+      </mat-form-field>
+      <div *ngIf="automationdesc.invalid && automationdesc.touched">
+        <small *ngIf="automationdesc.errors?.required">Description is required</small>
+        <small *ngIf="automationdesc.errors?.minlength">Description must be at least 20
+          characters</small>
+      </div>
+      <br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>As -Is Process:</mat-label>
+        <textarea formControlName="workinstructiondesc" matInput placeholder="as of today what's being done" required></textarea>
+      </mat-form-field>
+      <div *ngIf="workinstructiondesc.invalid && workinstructiondesc.touched">
+        <small *ngIf="workinstructiondesc.errors?.required">Description is required</small>
+        <small *ngIf="workinstructiondesc.errors?.minlength">Description must be at least 20
+          characters</small>
+        </div>
+
+      <section>
+
+
+      <mat-label>Effort(As - IS Today):</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>
+        <input matInput placeholder="hours" formControlName="time">
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cost</mat-label>
+        <input matInput placeholder="$" formControlName="cost">
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <mat-form-field appearance="outline">
+        <mat-label>Effort</mat-label>
+        <input matInput placeholder="FTE" formControlName="effort">
+      </mat-form-field>
+      <br>
+    </section>
+      <mat-form-field appearance="outline">
+        <mat-label>Ask - What has to be automated? Tools, Technology:</mat-label>
+        <textarea formControlName="techdetailsdesc" matInput placeholder="exact step which needs automation. Eg:ServiceNow" required></textarea>
+      </mat-form-field>
+      <div *ngIf="techdetailsdesc.invalid && techdetailsdesc.touched">
+        <small *ngIf="techdetailsdesc.errors?.required">Information is required</small>
+        <small *ngIf="techdetailsdesc.errors?.minlength">Information must be at least 20
+          characters</small>
+        </div>
+      <br>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Business Value: </mat-label>
+        <input formControlName="business" matInput placeholder="Cost, Time or Efforts which can be saved by the automation" required>
+      </mat-form-field>
+      <div *ngIf="business.invalid && business.touched">
+        <small *ngIf="business.errors?.required">Information is required</small>
+      </div>
+      <br>      
+      
+      <mat-form-field class="columns">
+        <mat-label>Link to attach SOP or WI: </mat-label>
+        <mat-label  *ngIf="selectedFiles; else newFile">{{selectedFiles.name}}</mat-label>
+        <!-- <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.item(0).name}}</mat-label> -->
+        <ng-template #newFile>          
+            <mat-label> Choose file</mat-label>
+        </ng-template>
+        <input matInput disabled>
+        <button mat-icon-button matSuffix (click)="fileInput.click()">
+            <mat-icon>attach_file</mat-icon>
+        </button>
+        <input hidden (change)="selectFile($event)" name="file" #fileInput type="file" id="file" >
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Point of contact for next steps: </mat-label>
+        <input formControlName="poc" matInput placeholder="Name">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ETA for automation deployment: </mat-label>
+        <input formControlName="eta" matInput >
+      </mat-form-field>
+      <br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Comments</mat-label>
+        <textarea formControlName="comments" matInput ></textarea>
+      </mat-form-field>
+    
+      <br>
+
+    <!--<button mat-raised-button (click)="addDetails(reqteam.value, reqname.value, selectedteam.value, automationdesc.value, workinstructiondesc.value, techdetailsdesc.value, business.value,poc.value, eta.value,time.value,cost.value,effort.value,comments.value)" [disabled]="!createForm.valid">Submit</button>-->
+    <button type="preview" (click)="showMe(createForm.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Preview</button>
+    <!-- <button type="upload" (click)="upload()"  [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Upload</button> -->
+    <button type="submit" (click)="sumbit(createForm.value)" [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Submit</button>
+    <button type="reset" (click)="reset()" mat-raised-button color="primary">Reset</button>
+
+    </div>
+    <div [hidden]="isDisplayed">
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Requester Name</mat-label>
+        <input formControlName="previewreqname" matInput disabled value="{{reqname.value}}">
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline" [hidden]="!isHidden">
+        <mat-label>Select Team</mat-label>        
+        <input formControlName="previewselectedteam"  matInput disabled value="{{selectedItem}}" >
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline"  [hidden]="isHidden"> 
+        <mat-label>Team Name</mat-label> 
+        <input formControlName="previewreqteam" matInput disabled value="{{reqteam.value}}">
+      </mat-form-field><br> 
+      
+      <mat-form-field appearance="outline">
+        <mat-label required>Requirement/Automation Type:* </mat-label>
+        <input matInput required disabled ><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-radio-group layout="row" class="example-radio-group" formControlName="reqtype" [(ngModel)]="selectedType" (change)="onRadioBtnChange($event, selectedteam.value,reqteam.value)" required>
+          <mat-radio-button class="example-radio-button" *ngFor="let type of requirementType" [value]="type.displayValue">
+            {{type.displayName}}
+          </mat-radio-button>
+        </mat-radio-group>
+        </mat-form-field>
+        <br>  
+  
+      
+      <mat-form-field appearance="outline" [hidden]="isHide" >
+        <mat-label>Short Description:</mat-label>
+        <input formControlName="previewshortdesc"  matInput disabled value="{{shortdesc.value}}" >
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline" [hidden]="!isHide" >
+        <mat-label>Select Short Description</mat-label>
+        <input formControlName="previewselectedshortdesc"  matInput disabled value="{{selectedShortDescItem}}">
+          <!-- <mat-option *ngFor="let option of shortDescriptionOptions" [value]="option.shortdesc">{{option.shortdesc}}</mat-option> -->
+          
+      </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Automation Description</mat-label>  
+        <textarea formControlName="previewautomationdesc" matInput disabled value="{{automationdesc.value}}"></textarea>
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>As -Is Process</mat-label>          
+        <textarea formControlName="previewworkinstructiondesc" matInput disabled value="{{workinstructiondesc.value}}"></textarea>
+      </mat-form-field><br>
+    
+      <section>
+      <mat-label margin-left="50px">Effort(As - IS Today):</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>        
+        <input formControlName="previewtime" matInput disabled value="{{time.value}}">
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Cost</mat-label>        
+        <input formControlName="previewcost" matInput disabled value="{{cost.value}}">
+        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+          
+      <mat-form-field appearance="outline">        
+        <mat-label>Effort</mat-label> 
+        <input formControlName="previeweffort" matInput disabled value="{{effort.value}}">
+        </mat-form-field><br>
+      
+      </section>
+      <mat-form-field appearance="outline">
+        <mat-label>>Ask - What has to be automated? Tools, Technology</mat-label>         
+        <textarea formControlName="previewtechdetailsdesc" matInput disabled value="{{techdetailsdesc.value}}"></textarea>
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Business Value(Metrics)</mat-label>         
+        <textarea formControlName="previewbusiness" matInput disabled value="{{business.value}}"></textarea>
+        </mat-form-field><br>
+      
+        <mat-form-field class="columns">
+          <mat-label>Link to attach SOP or WI: </mat-label>
+          <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.name}}</mat-label>
+          <ng-template #newFile>          
+              <mat-label> Choose file</mat-label>
+          </ng-template>
+          <input matInput disabled>
+          <!-- <button mat-icon-button matSuffix (click)="fileInput.click()">
+              <mat-icon>attach_file</mat-icon>
+          </button> -->
+          <input hidden (change)="selectFile($event)" #fileInput type="file" id="file" formControlName="previewattachment">
+        </mat-form-field><br>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>ETA for automation deployment</mat-label>         
+        <textarea formControlName="previeweta" matInput disabled value="{{eta.value}}"></textarea>
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Point of contact for next steps</mat-label>         
+        <textarea formControlName="previewpoc" matInput disabled value="{{poc.value}}"></textarea>
+      </mat-form-field><br>
+      
+      <mat-form-field appearance="outline">        
+        <mat-label>Comments</mat-label> 
+        <textarea formControlName="previewcomments" matInput disabled value="{{comments.value}}" ></textarea>
+      </mat-form-field>
+    <br>
+  
+    <button type="back" (click)="showMe(createForm.value)"  mat-raised-button color="primary">Back</button>
+
+    </div>
+  </form>
+    
+</mat-card-content>
+</mat-card>
+
+</div>
+

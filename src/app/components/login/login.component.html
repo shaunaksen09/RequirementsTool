@@ -1,0 +1,43 @@
+<div class="cf">
+  <!-- {{loginForm.value | json}} -->
+
+<section>
+<p>Automateverything</p><br>
+<img src="assets\images\Logo9.png">
+</section>
+
+<div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+  <mat-label>Login</mat-label>
+  <mat-form-field appearance="outline">
+  <mat-label>Username</mat-label>
+  <input [class.is-invalid]="username.invalid &&
+                              username.touched"  
+  formControlName="username" matInput type="email">
+  </mat-form-field>
+  <div *ngIf="username.invalid && username.touched">
+  <small *ngIf="username.errors?.required">username is required</small>  
+  <small *ngIf="username.errors?.maxlength">username cannot exceed 50 characters</small>  
+  <small *ngIf="username.errors?.email">proper email id is required</small>
+</div>
+<br>
+
+<mat-form-field appearance="outline">
+  <mat-label>Password</mat-label>
+  <input [class.is-invalid]="password.invalid &&
+                              password.touched"  
+  formControlName="password" matInput type="password">
+</mat-form-field>
+  <div *ngIf="password.invalid && password.touched">
+  <small *ngIf="password.errors?.required">Password is required</small>
+  </div>
+  <br>
+
+<button [disabled]="!loginForm.valid" mat-raised-button class="btn btn-primary" type="submit">Login</button>
+<div *ngIf="showErrorMessage">
+  <h4>Invalid Credentials</h4>
+</div><br>
+</form>
+</div>
+</div>
+

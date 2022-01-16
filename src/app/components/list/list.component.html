@@ -1,0 +1,79 @@
+<div> 
+  <mat-card> 
+    <div>
+      <mat-toolbar>
+        <span class="example-fill-remaining-space"></span>
+        <span><img src="assets\images\Logo6.png">Automation Requirement List</span>
+        <span class="example-fill-remaining-space"></span>
+        </mat-toolbar> 
+    </div>       
+    <div>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" routerLink="/logout">LogOut</button> 
+      </mat-card-actions>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      </mat-form-field>
+    </div>
+    <div>
+      <table mat-table [dataSource]="dataSource" matsort>
+        <ng-container matColumnDef="reqname">
+          <th mat-header-cell *matHeaderCellDef>RequesterName</th>
+          <td mat-cell *matCellDef="let element">{{element.reqname}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reqteam">
+          <th mat-header-cell *matHeaderCellDef>RequesterTeam</th>
+          <td mat-cell *matCellDef="let element">{{element.reqteam}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="reqtype">
+          <th mat-header-cell *matHeaderCellDef>RequirementType</th>
+          <td mat-cell *matCellDef="let element">{{element.reqtype}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="shortdesc">
+          <th mat-header-cell *matHeaderCellDef>ShortDescription</th>
+          <td mat-cell *matCellDef="let element">{{element.shortdesc}}</td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="automationdesc">
+          <th mat-header-cell *matHeaderCellDef>AutomationDescription</th>
+          <td mat-cell *matCellDef="let element">{{element.automationdesc}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="techdetailsdesc">
+          <th mat-header-cell *matHeaderCellDef>TechnicalDetails</th>
+          <td mat-cell *matCellDef="let element">{{element.techdetailsdesc}}</td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">{{element.status}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="mat-column-right">Actions</th>
+          <td mat-cell *matCellDef="let element" class="mat-column-right">
+            <!-- <button mat-button color="primary" (click)="editDetails(element._id)">Edit</button>
+          
+            <button mat-button color="primary" (click)="editDetails(element._id)">Delete</button> -->
+
+            <div class="btn-group">  
+              <button mat-button color="primary" (click)="editDetails(element._id)">Edit</button>        
+              <button type="button" class="btn btn-danger mr-1" (click)="deleteDetails(element._id)">Delete</button>
+            </div>  
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>      
+
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div>
+   
+
+

@@ -1,0 +1,37 @@
+body {
+    margin: 100px 0;
+    background: #043C8F;
+  }
+  
+  .form-horizontal {
+    max-width: 90%;
+    margin: auto;
+    border: 1px solid #eee;
+    background: #ffffff;
+    font-size: large;
+  }
+  .form-horizontal .logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .form-horizontal:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .form-horizontal .form-heading {
+    background: #043C8F;
+    padding: 10px 15px;
+  }
+  .form-horizontal .form-heading h2 {
+    color: #fff;
+    margin: 0;
+  }
+  .form-horizontal .form-group {
+    max-width: 100%;
+    margin: auto;
+    margin: 15px;
+    /* .form-control: .form-horizontal .form-group focus; */
+    /* .form-control-box-shadow: none; */
+  }
