@@ -1,0 +1,108 @@
+<div class="container-fluid">
+    <mat-toolbar color="primary" >
+      <span class="example-fill-remaining-space"></span>
+      <span><img src="assets\images\Logo6.png">Automation Requirement Form</span>
+      <span class="example-fill-remaining-space"></span>
+    </mat-toolbar>
+
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Requester Name:</mat-label>
+        <input matInput disabled value="{{createFormData.reqname}}">
+    </mat-form-field><br>
+ 
+    <mat-form-field appearance="outline">
+        <mat-label>Select Team</mat-label>
+        <mat-select matInput disabled value="{{createFormData.selectedteam}}">
+          <!-- <mat-option *ngFor="let option of requesterTeamOptions" [value]="option.value">{{option.viewValue}}</mat-option> -->
+          </mat-select>
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Team Name</mat-label>
+        <input  matInput disabled value="{{createFormData.reqteam}}" >
+      </mat-form-field><br>
+  
+      <mat-label>Requirement/Automation Type:  </mat-label>
+      <mat-radio-group >
+        <mat-radio-button value="yes">New Automation</mat-radio-button>
+        <mat-radio-button value="no" >Enhancement</mat-radio-button>
+      </mat-radio-group><br>
+      
+      <section>
+        <mat-form-field appearance="outline">
+          <mat-label>Short Description:</mat-label>
+          <input  matInput disabled value="{{createFormData.shortdesc}}" >
+        </mat-form-field><br>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Select Short Description</mat-label>
+          <mat-select matInput disabled value="{{createFormData.selectedshortdesc}}" >
+            <!-- <mat-option *ngFor="let option of shortDescriptionOptions" [value]="option.shortdesc">{{option.shortdesc}}</mat-option> -->
+            </mat-select>
+        </mat-form-field><br>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Automation Description:</mat-label>
+        <input  matInput disabled value="{{createFormData.automationdesc}}" >
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>As -Is Process:</mat-label>
+        <input  matInput disabled value="{{createFormData.workinstructiondesc}}" >
+      </mat-form-field>
+      </section>  
+  
+      <mat-label>Effort(As - IS Today):</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Time</mat-label>
+        <input  matInput disabled value="{{createFormData.time}}" >
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Cost</mat-label>
+        <input  matInput disabled value="{{createFormData.cost}}" >
+      </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Effort</mat-label>
+        <input  matInput disabled value="{{createFormData.effort}}" >
+      </mat-form-field> <br>
+      <section>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Ask - What has to be automated? Tools, Technology:</mat-label>
+            <input  matInput disabled value="{{createFormData.techdetailsdesc}}" >
+        </mat-form-field> <br>
+  
+      <section>
+        <div class="example-label">Link to attach SOP or WI:
+            <input disabled type="file" accept="image/*" #file></div>
+  
+      </section><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Business Value (Metrics): </mat-label>
+        <input  matInput disabled value="{{createFormData.business}}" >
+      </mat-form-field><br>   
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Point of contact for next steps: </mat-label>
+        <input  matInput disabled value="{{createFormData.poc}}" >
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>ETA for automation deployment: </mat-label>
+        <input  matInput disabled value="{{createFormData.eta}}" >
+      </mat-form-field><br>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Comments</mat-label>
+        <input  matInput disabled value="{{createFormData.comments}}" >
+      </mat-form-field>
+    </section><br>
+    <button type="back" (click)="backClicked()" mat-raised-button color="primary">Back</button>
+    
+  </div>
+  
+  

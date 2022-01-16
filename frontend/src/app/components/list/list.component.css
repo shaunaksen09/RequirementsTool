@@ -1,0 +1,58 @@
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+  text-align-last: center;
+}
+mat-toolbar {
+  /*font-style: rgb(170, 8, 3);*/
+  /* background-color:rgb(138, 143, 146); */
+  
+  text-align-last: center;
+  /* margin: 10px 2000px 10px 245px; */
+  margin-left: auto;
+  margin-right: auto;
+ 
+  
+  font-family: 'Times New Roman', Times, serif;
+  font-size: xxx-large;
+}
+
+img{
+  
+  width: 130px;
+  height: 50px;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-right {
+  text-align: center;
+}
+
+p {
+  
+  /*font-family: 'Times New Roman', Times, serif;*/
+  font-size: xx-large;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 140px 1px 1px 1px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  font-size: 14px;
+  color: white;
+  background: #021076;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+td.mat-cell{
+  text-align: left;
+  max-width: 50px;
+  max-height: 50px;
+
+}

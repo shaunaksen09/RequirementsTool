@@ -1,0 +1,126 @@
+<div class="container-fluid">
+    <mat-card id="card" style="text-align: center;">
+    <mat-card-content style="text-align: center;">
+        <mat-toolbar color="primary" >
+        <span class="example-fill-remaining-space"></span>
+        <span><img src="assets\images\Logo6.png">Automation Requirement Form</span>
+        <span class="example-fill-remaining-space"></span>
+        </mat-toolbar>    
+    <form [formGroup]="editForm">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Requester Name</mat-label>
+          <input formControlName="reqname" matInput >
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline" >
+          <mat-label>Select Team</mat-label>        
+          <input formControlName="selectedteam" matInput >
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline" > 
+          <mat-label>Team Name</mat-label> 
+          <input formControlName="reqteam" matInput >
+        </mat-form-field><br> 
+  
+        <mat-form-field appearance="outline">
+          <mat-label required>Requirement/Automation Type:* </mat-label>
+          <input matInput required disabled ><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-radio-group layout="row" class="example-radio-group" formControlName="reqtype" [(ngModel)]="selectedType"  required>
+            <mat-radio-button class="example-radio-button" *ngFor="let type of requirementType" [value]="type.displayValue">
+              {{type.displayName}}
+            </mat-radio-button>
+          </mat-radio-group>
+          </mat-form-field>
+    
+        
+          <mat-form-field appearance="outline" >
+            <mat-label>Short Description:</mat-label>
+            <input formControlName="shortdesc" matInput>
+          </mat-form-field><br>  
+          
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Automation Description</mat-label>  
+          <textarea formControlName="automationdesc" matInput ></textarea>
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>As -Is Process</mat-label>          
+          <textarea formControlName="workinstructiondesc" matInput></textarea>
+        </mat-form-field><br>
+      
+        <section>
+        <mat-label margin-left="50px">Effort(As - IS Today):</mat-label>
+        <mat-form-field appearance="outline">
+          <mat-label>Time</mat-label>        
+          <input formControlName="time" matInput>
+        </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Cost</mat-label>        
+          <input formControlName="cost" matInput>
+          </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;
+            
+        <mat-form-field appearance="outline">        
+          <mat-label>Effort</mat-label> 
+          <input formControlName="effort" matInput>
+          </mat-form-field><br>
+        
+        </section>
+        <mat-form-field appearance="outline">
+          <mat-label>>Ask - What has to be automated? Tools, Technology</mat-label>         
+          <textarea formControlName="techdetailsdesc" matInput></textarea>
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Business Value(Metrics)</mat-label>         
+          <textarea formControlName="business" matInput></textarea>
+          </mat-form-field><br>
+
+          <mat-form-field class="columns" [hidden]="isHide">
+            <!-- <div> -->
+            <mat-label>Link to attach SOP or WI: Download file </mat-label>
+            <!-- <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.name}}</mat-label> -->
+            <!-- <ng-template #newFile>          
+                <mat-label> Choose file</mat-label>
+            </ng-template> -->
+            <input matInput disabled> 
+            <button mat-icon-button matSuffix (click)="download()">
+                <mat-icon>arrow_downward</mat-icon>
+            </button>
+            <!-- </div> -->
+            <!-- <input hidden (change)="selectFile($event)" #fileInput type="file" id="file" formControlName="previewattachment"> -->
+          </mat-form-field><br>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>ETA for automation deployment</mat-label>         
+          <textarea formControlName="eta" matInput></textarea>
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Point of contact for next steps</mat-label>         
+          <textarea formControlName="poc" matInput ></textarea>
+        </mat-form-field><br>
+        
+        <mat-form-field appearance="outline">        
+          <mat-label>Comments</mat-label> 
+          <textarea formControlName="comments" matInput ></textarea>
+        </mat-form-field><br>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select placeholder = "Status" [(ngModel)]="selectedstatus" formControlName="status" required>
+            <mat-option *ngFor="let option of statusOptions" [value]="option.value">{{option.value}}</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+      <button type="update" (click)="updateDetails(editForm.value)" [disabled]="editForm.pristine || editForm.invalid"  mat-raised-button color="primary">Update</button>      
+      <button type="back" (click)="back()"  mat-raised-button color="primary">Back</button>      
+    </form>
+    </mat-card-content>
+    </mat-card>
+</div>
